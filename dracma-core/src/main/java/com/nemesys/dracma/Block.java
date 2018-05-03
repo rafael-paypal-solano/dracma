@@ -14,6 +14,8 @@ public class Block implements Serializable {
 	 * 
 	 */
 	
+	public static String EMPTY_STRING = "";
+	
 	private String hash;
 	private String previousHash;
 	private String data; //our data will be a simple message.
@@ -31,6 +33,10 @@ public class Block implements Serializable {
 		this(data, timeStamp, previousBlock.hash);
 	}
 
+	public Block(String data, long timeStamp) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		this(data, timeStamp, EMPTY_STRING);
+	}
+	
 	public String getHash() {
 		return hash;
 	}
@@ -48,11 +54,11 @@ public class Block implements Serializable {
 	}
 	
 	public String calculateHash() throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		String calculatedhash = Strings.applySha256( 
+			String calculatedhash = Strings.applySha256( 
 				previousHash +
-				Long.toString(timeStamp) +
-				data 
-				);
+			Long.toString(timeStamp) +
+			data 
+		);
 		return calculatedhash;
 	}
 	
