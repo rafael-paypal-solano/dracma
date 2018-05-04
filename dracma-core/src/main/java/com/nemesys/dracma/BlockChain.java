@@ -33,7 +33,11 @@ public abstract class BlockChain {
 			 result = result && 
 					 compareInternalHashes(prev) && 
 					 compareHashes(prev, next) &&
-					 (mint == null || mint.isValid(this));
+					 (mint == null || 
+					 	(
+					 		mint.isValid(prev) && mint.isValid(next)
+					 	)
+					 );
 					 
 			 prev = next;
 					 
@@ -44,6 +48,7 @@ public abstract class BlockChain {
 				 
 		return true;
 	}
+	
 	public Mint getMint() {
 		return mint;
 	}
